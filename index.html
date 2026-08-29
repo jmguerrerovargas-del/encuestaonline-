@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.airtable.com https://*.n8n.cloud https://*.app.n8n.cloud; img-src 'self' data:;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="description" content="Encuesta de satisfacción de estudiantes del curso Antigravity con diseño minimalista moderno." />
+  <title>Evaluación de Experiencia · Antigravity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Fondo dinámico con malla y luces suaves -->
+  <div class="mesh-bg"></div>
+  <div class="spotlight"></div>
+
+  <main class="app-layout">
+    
+    <!-- Barra de Progreso Minimalista -->
+    <div class="progress-bar-container">
+      <div class="progress-header">
+        <span class="progress-label">Progreso de la evaluación</span>
+        <span class="progress-percent" id="progress-percent">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Contenedor Principal / Tarjeta Minimalista -->
+    <div class="survey-card">
+      
+      <!-- Cabecera de la encuesta -->
+      <header class="survey-header">
+        <div class="pill-badge">
+          <span class="pulse-ring"></span>
+          <span class="pulse-point"></span>
+          Curso Antigravity · Encuesta de Calidad
+        </div>
+        <h1 class="main-title">Tu experiencia en <span class="gradient-text">Antigravity</span></h1>
+        <p class="main-desc">
+          Queremos escuchar tu voz para optimizar cada detalle del contenido y las prácticas.
+        </p>
+      </header>
+
+      <!-- Formulario -->
+      <form id="survey-form" novalidate>
+
+        <!-- Campo Honeypot oculto para protección anti-bots (Spam Protection) -->
+        <div style="display:none !important; visibility:hidden; opacity:0; position:absolute; left:-9999px;" aria-hidden="true">
+          <label for="survey_hp_company">No llenar este campo si eres humano:</label>
+          <input type="text" id="survey_hp_company" name="survey_hp_company" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <!-- PREGUNTA 1: id_estudiante -->
+        <section class="question-block" id="block-id_estudiante">
+          <div class="question-header">
+            <div class="step-num">01</div>
+            <div class="step-meta">
+              <label for="id_estudiante" class="question-title">
+                Identificador de Alumno <span class="req-star">*</span>
+              </label>
+              <span class="question-subtitle">Ingresa tu código de estudiante, usuario o correo electrónico.</span>
+            </div>
+          </div>
+          
+          <div class="input-wrapper">
+            <input
+              type="text"
+              id="id_estudiante"
+              name="id_estudiante"
+              class="minimal-input"
+              placeholder="p. ej. AG-2026-042 o alumno@antigravity.edu"
+              required
+              maxlength="80"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <div class="input-focus-line"></div>
+          </div>
+          <p class="field-error" id="error-id_estudiante">Por favor ingresa tu identificador (máx. 80 caracteres).</p>
+        </section>
+
+        <!-- PREGUNTA 2: nivel_satisfaccion -->
+        <section class="question-block" id="block-nivel_satisfaccion">
+          <div class="question-header">
+            <div class="step-num">02</div>
+            <div class="step-meta">
+              <span class="question-title">
+                Nivel de Satisfacción General <span class="req-star">*</span>
+              </span>
+              <span class="question-subtitle">¿Cómo calificarías tu experiencia global en el curso?</span>
+            </div>
+          </div>
+
+          <div class="rating-matrix" data-name="nivel_satisfaccion">
+            <div class="rating-grid">
+              <label class="rating-pill">
+                <input type="radio" name="nivel_satisfaccion" value="1" required />
+                <span class="pill-btn">
+                  <span class="pill-number">1</span>
+                  <span class="pill-tag">Muy insatisfecho</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="nivel_satisfaccion" value="2" />
+                <span class="pill-btn">
+                  <span class="pill-number">2</span>
+                  <span class="pill-tag">Insatisfecho</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="nivel_satisfaccion" value="3" />
+                <span class="pill-btn">
+                  <span class="pill-number">3</span>
+                  <span class="pill-tag">Neutral</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="nivel_satisfaccion" value="4" />
+                <span class="pill-btn">
+                  <span class="pill-number">4</span>
+                  <span class="pill-tag">Satisfecho</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="nivel_satisfaccion" value="5" />
+                <span class="pill-btn">
+                  <span class="pill-number">5</span>
+                  <span class="pill-tag">Muy satisfecho</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <p class="field-error" id="error-nivel_satisfaccion">Selecciona una opción del 1 al 5.</p>
+        </section>
+
+        <!-- PREGUNTA 3: claridad_contenido -->
+        <section class="question-block" id="block-claridad_contenido">
+          <div class="question-header">
+            <div class="step-num">03</div>
+            <div class="step-meta">
+              <span class="question-title">
+                Claridad del Contenido <span class="req-star">*</span>
+              </span>
+              <span class="question-subtitle">¿Las explicaciones, conceptos y módulos fueron fáciles de comprender?</span>
+            </div>
+          </div>
+
+          <div class="rating-matrix" data-name="claridad_contenido">
+            <div class="rating-grid">
+              <label class="rating-pill">
+                <input type="radio" name="claridad_contenido" value="1" required />
+                <span class="pill-btn">
+                  <span class="pill-number">1</span>
+                  <span class="pill-tag">Muy poco claro</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="claridad_contenido" value="2" />
+                <span class="pill-btn">
+                  <span class="pill-number">2</span>
+                  <span class="pill-tag">Poco claro</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="claridad_contenido" value="3" />
+                <span class="pill-btn">
+                  <span class="pill-number">3</span>
+                  <span class="pill-tag">Aceptable</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="claridad_contenido" value="4" />
+                <span class="pill-btn">
+                  <span class="pill-number">4</span>
+                  <span class="pill-tag">Claro</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="claridad_contenido" value="5" />
+                <span class="pill-btn">
+                  <span class="pill-number">5</span>
+                  <span class="pill-tag">Muy claro</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <p class="field-error" id="error-claridad_contenido">Selecciona una calificación de claridad.</p>
+        </section>
+
+        <!-- PREGUNTA 4: aplicabilidad_practica -->
+        <section class="question-block" id="block-aplicabilidad_practica">
+          <div class="question-header">
+            <div class="step-num">04</div>
+            <div class="step-meta">
+              <span class="question-title">
+                Aplicabilidad Práctica <span class="req-star">*</span>
+              </span>
+              <span class="question-subtitle">¿Sientes que podrás aplicar lo aprendido a casos y desafíos reales?</span>
+            </div>
+          </div>
+
+          <div class="rating-matrix" data-name="aplicabilidad_practica">
+            <div class="rating-grid">
+              <label class="rating-pill">
+                <input type="radio" name="aplicabilidad_practica" value="1" required />
+                <span class="pill-btn">
+                  <span class="pill-number">1</span>
+                  <span class="pill-tag">Nada aplicable</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="aplicabilidad_practica" value="2" />
+                <span class="pill-btn">
+                  <span class="pill-number">2</span>
+                  <span class="pill-tag">Poco aplicable</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="aplicabilidad_practica" value="3" />
+                <span class="pill-btn">
+                  <span class="pill-number">3</span>
+                  <span class="pill-tag">Moderada</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="aplicabilidad_practica" value="4" />
+                <span class="pill-btn">
+                  <span class="pill-number">4</span>
+                  <span class="pill-tag">Muy aplicable</span>
+                </span>
+              </label>
+              <label class="rating-pill">
+                <input type="radio" name="aplicabilidad_practica" value="5" />
+                <span class="pill-btn">
+                  <span class="pill-number">5</span>
+                  <span class="pill-tag">Totalmente</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <p class="field-error" id="error-aplicabilidad_practica">Selecciona el nivel de aplicabilidad.</p>
+        </section>
+
+        <!-- PREGUNTA 5: comentarios_adicionales -->
+        <section class="question-block" id="block-comentarios_adicionales">
+          <div class="question-header">
+            <div class="step-num">05</div>
+            <div class="step-meta">
+              <div class="title-with-badge">
+                <label for="comentarios_adicionales" class="question-title">Comentarios Adicionales</label>
+                <span class="badge-optional">Opcional</span>
+              </div>
+              <span class="question-subtitle">¿Algún aspecto específico que quieras destacar o sugerencia de mejora?</span>
+            </div>
+          </div>
+
+          <div class="textarea-wrapper">
+            <textarea
+              id="comentarios_adicionales"
+              name="comentarios_adicionales"
+              class="minimal-textarea"
+              rows="4"
+              maxlength="500"
+              placeholder="Comparte tus impresiones, dudas o recomendaciones..."
+            ></textarea>
+            <div class="char-badge">
+              <span id="char-count">0</span> / 500
+            </div>
+          </div>
+        </section>
+
+        <!-- Botón de Envío -->
+        <div class="form-footer">
+          <button type="submit" id="submit-btn" class="submit-action-btn">
+            <span class="btn-caption">Enviar Evaluación</span>
+            <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <!-- Panel de Confirmación con Animación -->
+      <div id="success-view" class="success-view hidden">
+        <div class="success-icon-orbit">
+          <div class="orbit-particle"></div>
+          <div class="success-check-badge">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        <h2 class="success-heading">¡Evaluación Registrada!</h2>
+        <p class="success-subheading">
+          Gracias por contribuir al constante crecimiento y mejora del curso <strong>Antigravity</strong>.
+        </p>
+
+        <div id="airtable-sync-container"></div>
+
+        <div class="receipt-card" id="receipt-card">
+          <!-- Se inyecta dinámicamente con JS -->
+        </div>
+
+        <div class="success-button-group">
+          <button type="button" id="btn-restart" class="btn-action-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Nueva respuesta
+          </button>
+          <button type="button" id="btn-export-json" class="btn-action-glow">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Exportar JSON
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Barra de Estado / Panel del Docente -->
+    <footer class="app-status-bar">
+      <div class="status-left">
+        <span class="status-indicator"></span>
+        <span>Respuestas locales: <strong id="total-records-count">0</strong></span>
+      </div>
+      <div class="status-right" style="display: flex; align-items: center; gap: 1rem;">
+        <span class="airtable-status-tag">
+          <span class="live-dot"></span>
+          Airtable conectado
+        </span>
+        <button type="button" id="btn-export-csv-direct" class="ghost-link">Descargar CSV</button>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="app.js?v=2.1"></script>
+</body>
+</html>
