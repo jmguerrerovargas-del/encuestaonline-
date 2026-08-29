@@ -6,7 +6,7 @@ Plataforma web moderna, minimalista y ultra-rápida para la recolección y anál
 
 ## ✨ Características Principales
 
-- **Diseño Cyber Obsidian / Warm Orange**: Interfaz pulida con estética futurista, micro-animaciones, efectos de luz ambiental y tipografía optimizada (*Plus Jakarta Sans* y *Space Grotesk*).
+- **Diseño Cyber Magenta / Electric Violet**: Interfaz pulida con estética futurista en tonos rosa neón y violeta eléctrico, micro-animaciones, efectos de luz ambiental y tipografía optimizada (*Plus Jakarta Sans* y *Space Grotesk*).
 - **Barra de Progreso Dinámica**: Indicador en tiempo real del estado de completado de la evaluación.
 - **Matriz de Calificación Intuitiva**: Sistema de botones tipo píldora (1 a 5) con etiquetas descriptivas y respuesta háptica/visual instantánea.
 - **Comprobante y Resumen Visual**: Pantalla de confirmación con vista detallada de las respuestas registradas y estado de sincronización.
